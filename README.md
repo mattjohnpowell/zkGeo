@@ -65,6 +65,7 @@ WHITEPAPER.md       design rationale and safety model
 THREAT_MODEL.md     privacy, trust, and abuse notes
 ROADMAP.md          next implementation steps
 packages/js/        JavaScript protocol envelope SDK
+packages/circuits/  prototype circuit workspace
 examples/           minimal verifier wiring examples
 fixtures/           synthetic protocol test vectors
 ```

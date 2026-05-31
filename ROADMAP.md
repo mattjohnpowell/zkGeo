@@ -11,7 +11,7 @@
 
 ## v0.1 Circuit Decision
 
-- [ ] Pick first proving stack: Noir first unless benchmarking blocks it.
+- [x] Pick first proving stack candidate: Noir unless benchmarking blocks it.
 - [x] Define disclosure levels: city, district, cell, meter, and latlng.
 - [x] Define conservative passive dating discovery policy.
 - [ ] Decide Sparkler-specific H3 indexing policy.
@@ -22,6 +22,8 @@
 
 ## v0.2 Prototype Circuit
 
+- [x] Add prototype circuit package scaffold.
+- [ ] Implement a minimal absolute-coordinate-bounds circuit with runnable Noir tests.
 - [ ] Implement a minimal cell-membership circuit.
 - [ ] Add proof generation CLI.
 - [x] Add envelope validation CLI.

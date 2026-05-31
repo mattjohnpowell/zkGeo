@@ -7,7 +7,8 @@
     "packages/js"
   ],
   "scripts": {
-    "test": "npm --workspace @zkgeo/protocol test",
+    "test": "npm --workspace @zkgeo/protocol test && npm run check:circuits",
+    "check:circuits": "node scripts/check-circuit-scaffold.mjs",
     "scan:secrets": "node scripts/secret-scan.mjs"
   },
   "license": "MIT"
