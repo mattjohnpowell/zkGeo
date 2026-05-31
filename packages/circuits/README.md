@@ -21,4 +21,11 @@ nargo check
 nargo test
 ```
 
+Synthetic witness fixtures live under `fixtures/witnesses/`. The current prototype circuit expects these Noir inputs:
+
+```txt
+lat_abs_e6
+lng_abs_e6
+```
+
 Do not commit private witnesses, real coordinates, generated proof inputs tied to a person, proving keys, or production verification keys.

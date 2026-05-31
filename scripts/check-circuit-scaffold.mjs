@@ -5,6 +5,9 @@ const requiredFiles = [
   'packages/circuits/README.md',
   'packages/circuits/Nargo.toml',
   'packages/circuits/src/main.nr',
+  'fixtures/witnesses/coordinate-bounds-valid.json',
+  'fixtures/witnesses/coordinate-bounds-invalid-latitude.json',
+  'fixtures/witnesses/coordinate-bounds-invalid-longitude.json',
 ];
 
 const requiredWarnings = [

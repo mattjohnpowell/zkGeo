@@ -23,6 +23,7 @@
 ## v0.2 Prototype Circuit
 
 - [x] Add prototype circuit package scaffold.
+- [x] Add synthetic witness fixtures for coordinate-bounds prototype.
 - [ ] Implement a minimal absolute-coordinate-bounds circuit with runnable Noir tests.
 - [ ] Implement a minimal cell-membership circuit.
 - [ ] Add proof generation CLI.

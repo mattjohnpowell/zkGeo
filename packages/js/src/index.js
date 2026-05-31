@@ -234,6 +234,14 @@ export function decodeCoordinateE6(coordinateE6) {
   return coordinateE6 / COORDINATE_SCALE;
 }
 
+export function encodeCoordinateMagnitudeE6(coordinateE6, name = 'coordinateE6') {
+  if (!Number.isInteger(coordinateE6)) {
+    throw new TypeError(`${name} must be an integer.`);
+  }
+
+  return Math.abs(coordinateE6);
+}
+
 export function canonicalizeTimestamp(value) {
   const date = value instanceof Date ? value : parseIsoDate(value);
   if (!date || Number.isNaN(date.getTime())) {

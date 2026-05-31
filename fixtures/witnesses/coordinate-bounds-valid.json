@@ -1,0 +1,12 @@
+{
+  "description": "Synthetic London-like absolute coordinate magnitudes for prototype coordinate-bounds circuit.",
+  "lat_e6": 51507351,
+  "lng_e6": -127758,
+  "noir_inputs": {
+    "lat_abs_e6": "51507351",
+    "lng_abs_e6": "127758"
+  },
+  "expected": {
+    "ok": true
+  }
+}

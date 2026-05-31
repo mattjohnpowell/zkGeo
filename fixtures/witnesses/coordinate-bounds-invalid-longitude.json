@@ -1,0 +1,13 @@
+{
+  "description": "Synthetic out-of-range absolute longitude magnitude for prototype coordinate-bounds circuit.",
+  "lat_e6": 51507351,
+  "lng_e6": 180000001,
+  "noir_inputs": {
+    "lat_abs_e6": "51507351",
+    "lng_abs_e6": "180000001"
+  },
+  "expected": {
+    "ok": false,
+    "error": "longitude magnitude exceeds range"
+  }
+}
