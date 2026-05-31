@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 import { readFile } from 'node:fs/promises';
-import { validateProofEnvelope } from '../index.js';
+import { DATING_DISCOVERY_POLICY, validateProofEnvelope } from '../index.js';
 
 const args = process.argv.slice(2);
 
@@ -15,6 +15,11 @@ const options = {};
 for (let index = 1; index < args.length; index += 1) {
   const arg = args[index];
   const value = args[index + 1];
+
+  if (arg === '--dating-discovery') {
+    Object.assign(options, DATING_DISCOVERY_POLICY);
+    continue;
+  }
 
   if (arg === '--max-disclosure-level') {
     options.maxDisclosureLevel = requireValue(arg, value);
@@ -73,6 +78,7 @@ function printUsage() {
   console.log(`Usage: zkgeo-validate-envelope <envelope.json> [options]
 
 Options:
+  --dating-discovery              Apply conservative passive dating discovery policy
   --max-disclosure-level <level>   Highest disclosure level accepted by policy
   --max-cell-resolution <0-15>     Highest H3 resolution accepted by policy
   --max-validity-seconds <seconds> Longest accepted validity window

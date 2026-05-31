@@ -7,12 +7,14 @@
 - [x] Draft whitepaper.
 - [x] Draft threat model.
 - [x] Add SDK envelope validation tests.
+- [x] Document test requirements for security-sensitive changes.
 
 ## v0.1 Circuit Decision
 
 - [ ] Pick first proving stack: Noir first unless benchmarking blocks it.
 - [x] Define disclosure levels: city, district, cell, meter, and latlng.
-- [ ] Decide dating-safe default H3 resolution policy for Sparkler integration.
+- [x] Define conservative passive dating discovery policy.
+- [ ] Decide Sparkler-specific H3 indexing policy.
 - [x] Add verifier policy checks for maximum allowed disclosure level.
 - [x] Add verifier policy checks for maximum allowed H3 resolution.
 - [x] Define canonical integer encoding for lat/lng and timestamps.
@@ -36,6 +38,7 @@
 
 - [ ] Security review of circuit and SDK.
 - [ ] Dating safety review for granularity defaults, live-presence leakage, and escalation flows.
-- [ ] Interop test vectors.
+- [x] Initial envelope validation test vectors.
+- [ ] Circuit and proof interop test vectors.
 - [ ] Sparkler location service integration.
 - [ ] Dart and TypeScript package publishing.

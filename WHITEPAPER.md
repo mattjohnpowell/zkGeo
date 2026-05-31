@@ -2,6 +2,12 @@
 
 Status: working draft v0.
 
+## Development and Review Status
+
+This whitepaper and repository are AI-assisted and vibe coded. They are intended to make the design concrete enough to review, test, and challenge. They are not an audit, a proof of security, or a claim that the protocol is safe for production deployment.
+
+The project should be developed under an adversarial review assumption: every cryptographic claim, privacy claim, verifier rule, and dating-safety default should be understandable to an external expert and backed by tests, fixtures, or explicit threat-model notes.
+
 ## Abstract
 
 zkGeo is a privacy-preserving location proof protocol for applications that need approximate geographic discovery without collecting or publishing exact user coordinates.

@@ -50,6 +50,41 @@ test('validate-envelope CLI rejects policy violations', async () => {
   );
 });
 
+test('validate-envelope CLI supports dating discovery policy defaults', async () => {
+  const envelopePath = await writeEnvelope({
+    disclosureLevel: 'district',
+    cellResolution: 7,
+  });
+
+  const { stdout } = await execFileAsync('node', [
+    'src/cli/validate-envelope.js',
+    envelopePath,
+    '--dating-discovery',
+    '--now',
+    '2026-05-31T10:05:00.000Z',
+  ]);
+
+  assert.match(stdout, /Valid zkGeo envelope/);
+});
+
+test('validate-envelope CLI rejects dating discovery precision escalation', async () => {
+  const envelopePath = await writeEnvelope({
+    disclosureLevel: 'cell',
+    cellResolution: 7,
+  });
+
+  await assert.rejects(
+    execFileAsync('node', [
+      'src/cli/validate-envelope.js',
+      envelopePath,
+      '--dating-discovery',
+      '--now',
+      '2026-05-31T10:05:00.000Z',
+    ]),
+    /Invalid zkGeo envelope/,
+  );
+});
+
 async function writeEnvelope({ disclosureLevel, cellResolution }) {
   const directory = await mkdtemp(path.join(tmpdir(), 'zkgeo-'));
   const envelopePath = path.join(directory, 'envelope.json');

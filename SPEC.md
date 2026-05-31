@@ -40,6 +40,20 @@ For decentralized dating, `city` or `district` should be the default. `meter` an
 
 The proof envelope binds the proof to the selected disclosure level so verifiers can reject a proof presented under a different rendering policy.
 
+## Default Dating Discovery Policy
+
+Passive dating discovery should use a conservative verifier policy:
+
+```json
+{
+  "maxDisclosureLevel": "district",
+  "maxCellResolution": 7,
+  "maxValiditySeconds": 900
+}
+```
+
+This policy is not a proof that discovery is safe. It is a minimum SDK default for rejecting obviously over-precise or stale envelopes. Applications still need anti-probing, rate limits, identifier-linkability controls, and mutual-consent rules before any precision escalation.
+
 ## Proof Envelope
 
 A zkGeo proof is transported in a protocol envelope:

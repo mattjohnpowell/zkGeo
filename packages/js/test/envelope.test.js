@@ -2,6 +2,7 @@ import assert from 'node:assert/strict';
 import { test } from 'node:test';
 import {
   COORDINATE_SCALE,
+  DATING_DISCOVERY_POLICY,
   DISCLOSURE_LEVELS,
   LOCATION_CELL_V0,
   canonicalizeTimestamp,
@@ -10,6 +11,8 @@ import {
   encodeLatitude,
   encodeLongitude,
   validateProofEnvelope,
+  validateDatingDiscoveryEnvelope,
+  verifyDatingDiscoveryEnvelope,
   verifyProofEnvelope,
 } from '../src/index.js';
 
@@ -94,6 +97,35 @@ test('rejects disclosure levels above verifier policy', () => {
 
   assert.equal(result.ok, false);
   assert.match(result.errors[0], /exceeds policy/);
+});
+
+test('exports conservative dating discovery policy defaults', () => {
+  assert.deepEqual(DATING_DISCOVERY_POLICY, {
+    maxDisclosureLevel: 'district',
+    maxCellResolution: 7,
+    maxValiditySeconds: 900,
+  });
+});
+
+test('validates dating discovery envelopes with conservative defaults', () => {
+  const result = validateDatingDiscoveryEnvelope(validEnvelope, {
+    now: new Date('2026-05-31T10:05:00.000Z'),
+  });
+
+  assert.equal(result.ok, true);
+});
+
+test('rejects dating discovery envelopes above default precision policy', () => {
+  const envelope = structuredClone(validEnvelope);
+  envelope.disclosure_level = 'cell';
+  envelope.public_inputs.disclosure_level = 'cell';
+
+  const result = validateDatingDiscoveryEnvelope(envelope, {
+    now: new Date('2026-05-31T10:05:00.000Z'),
+  });
+
+  assert.equal(result.ok, false);
+  assert.match(result.errors[0], /disclosure_level exceeds policy/);
 });
 
 test('rejects cell resolutions above verifier policy', () => {
@@ -249,4 +281,14 @@ test('rejects when injected proof verifier rejects', async () => {
 
   assert.equal(result.ok, false);
   assert.match(result.errors[0], /rejected/);
+});
+
+test('verifies dating discovery envelopes with conservative defaults', async () => {
+  const result = await verifyDatingDiscoveryEnvelope(
+    validEnvelope,
+    async () => true,
+    { now: new Date('2026-05-31T10:05:00.000Z') },
+  );
+
+  assert.equal(result.ok, true);
 });

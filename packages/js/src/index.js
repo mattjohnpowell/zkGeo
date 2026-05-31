@@ -1,5 +1,10 @@
 export const LOCATION_CELL_V0 = 'zkgeo.location.cell.v0';
 export const DISCLOSURE_LEVELS = ['city', 'district', 'cell', 'meter', 'latlng'];
+export const DATING_DISCOVERY_POLICY = Object.freeze({
+  maxDisclosureLevel: 'district',
+  maxCellResolution: 7,
+  maxValiditySeconds: 15 * 60,
+});
 export const COORDINATE_SCALE = 1_000_000;
 export const MIN_LATITUDE_E6 = -90 * COORDINATE_SCALE;
 export const MAX_LATITUDE_E6 = 90 * COORDINATE_SCALE;
@@ -147,6 +152,13 @@ export function validateProofEnvelope(envelope, options = {}) {
   return { ok: true, errors: [] };
 }
 
+export function validateDatingDiscoveryEnvelope(envelope, options = {}) {
+  return validateProofEnvelope(envelope, {
+    ...DATING_DISCOVERY_POLICY,
+    ...options,
+  });
+}
+
 export async function verifyProofEnvelope(envelope, verifier, options = {}) {
   const validation = validateProofEnvelope(envelope, options);
   if (!validation.ok) {
@@ -164,6 +176,13 @@ export async function verifyProofEnvelope(envelope, verifier, options = {}) {
   });
 
   return verified === true ? { ok: true, errors: [] } : invalid('Proof verifier rejected the proof.');
+}
+
+export async function verifyDatingDiscoveryEnvelope(envelope, verifier, options = {}) {
+  return verifyProofEnvelope(envelope, verifier, {
+    ...DATING_DISCOVERY_POLICY,
+    ...options,
+  });
 }
 
 export function createProofEnvelope(input) {

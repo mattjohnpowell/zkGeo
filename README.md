@@ -10,6 +10,12 @@ This repo is intentionally separate from Sparkler. Sparkler can consume zkGeo la
 
 For the broader design rationale, see [WHITEPAPER.md](WHITEPAPER.md).
 
+## Security Status
+
+This repository is AI-assisted and vibe coded. Treat all code and protocol text as unaudited until reviewed by qualified cryptography, application security, and product safety experts.
+
+The project goal is to make the implementation boringly reviewable: small changes, tests for every locally verifiable behavior change, conservative claims, synthetic fixtures, explicit threat-model notes, and no placeholder cryptography presented as production verification.
+
 ## Current Status
 
 This is a v0 scaffold. It defines:
@@ -49,6 +55,8 @@ and the proof is bound to the stated subject, nonce, and validity window.
 
 Disclosure levels should be explicit. Dating-style discovery should default to city, district, or similarly coarse rendering. Meter-level or raw latitude/longitude rendering is a high-risk mode and should require deliberate user consent, strong contextual justification, and app-level safeguards.
 
+The JavaScript SDK exports `DATING_DISCOVERY_POLICY` and `validateDatingDiscoveryEnvelope` for passive dating discovery. These defaults reject envelopes above `district`, above H3 resolution 7, or longer than 15 minutes.
+
 ## Repository Layout
 
 ```txt
@@ -58,9 +66,12 @@ THREAT_MODEL.md     privacy, trust, and abuse notes
 ROADMAP.md          next implementation steps
 packages/js/        JavaScript protocol envelope SDK
 examples/           minimal verifier wiring examples
+fixtures/           synthetic protocol test vectors
 ```
 
 ## Development
+
+zkGeo is security-sensitive. Add or update tests for every behavior change that can be verified locally.
 
 Run tests:
 
@@ -78,6 +89,12 @@ Validate a proof envelope without performing cryptographic proof verification:
 
 ```powershell
 node packages/js/src/cli/validate-envelope.js envelope.json --max-disclosure-level district --max-cell-resolution 7
+```
+
+For passive dating discovery defaults:
+
+```powershell
+node packages/js/src/cli/validate-envelope.js envelope.json --dating-discovery
 ```
 
 ## Naming

@@ -1,0 +1,41 @@
+{
+  "version": "zkgeo-fixtures-v0",
+  "now": "2026-05-31T10:05:00.000Z",
+  "cases": [
+    {
+      "name": "valid district-level cell envelope",
+      "file": "envelopes/valid-district-v0.json",
+      "ok": true,
+      "policy": {
+        "maxDisclosureLevel": "district",
+        "maxCellResolution": 7,
+        "maxValiditySeconds": 900
+      },
+      "reason": "Synthetic district-level envelope fits dating-safe verifier policy."
+    },
+    {
+      "name": "reject meter-level disclosure under district policy",
+      "file": "envelopes/invalid-disclosure-escalation-v0.json",
+      "ok": false,
+      "error": "disclosure_level exceeds policy",
+      "policy": {
+        "maxDisclosureLevel": "district",
+        "maxCellResolution": 7,
+        "maxValiditySeconds": 900
+      },
+      "reason": "Verifier policy rejects precision escalation."
+    },
+    {
+      "name": "reject high H3 resolution under district policy",
+      "file": "envelopes/invalid-resolution-escalation-v0.json",
+      "ok": false,
+      "error": "cell_resolution exceeds policy",
+      "policy": {
+        "maxDisclosureLevel": "district",
+        "maxCellResolution": 7,
+        "maxValiditySeconds": 900
+      },
+      "reason": "Verifier policy rejects finer cells even when disclosure label is district."
+    }
+  ]
+}
