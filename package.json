@@ -1,0 +1,14 @@
+{
+  "name": "zkgeo",
+  "private": true,
+  "version": "0.0.0",
+  "description": "Privacy-preserving location proof protocol.",
+  "workspaces": [
+    "packages/js"
+  ],
+  "scripts": {
+    "test": "npm --workspace @zkgeo/protocol test",
+    "scan:secrets": "node scripts/secret-scan.mjs"
+  },
+  "license": "MIT"
+}
